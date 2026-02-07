@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>Negative Marks Calculator | Exam Score Tool</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -253,24 +253,46 @@ function getGrade(p){
   if(p>=45) return "C 😅";
   return "D 😔";
 }
-function calc(){
-  let t=+tq.value,c=+ca.value,w=+wa.value,m=+mpq.value,n=+neg.value;
-  if(t<=0||c<0||w<0||(c+w)>t){alert("Invalid input");return;}
-  let total=t*m;
-  let score=(c*m)-(w*n);
-  let per=(score/total)*100;
 
-  result.style.display="block";
-  score.innerHTML="Score<br>"+score.toFixed(2);
-  total.innerHTML="Total Marks<br>"+total.toFixed(2);
-  percent.innerHTML="Percentage<br>"+per.toFixed(2)+"%";
-  grade.innerHTML="Grade<br>"+getGrade(per);
+function calc(){
+  let t = +tq.value;
+  let c = +ca.value;
+  let w = +wa.value;
+  let m = +mpq.value;
+  let n = +neg.value;
+
+  if(t<=0 || c<0 || w<0 || (c+w)>t){
+    alert("Invalid input");
+    return;
+  }
+
+  let totalMarks = t * m;
+  let scoredMarks = (c * m) - (w * n);
+  let percentVal = (scoredMarks / totalMarks) * 100;
+
+  result.style.display = "block";
+
+  document.getElementById("score").innerHTML =
+    "Score<br>" + scoredMarks.toFixed(2);
+
+  document.getElementById("total").innerHTML =
+    "Total Marks<br>" + totalMarks.toFixed(2);
+
+  document.getElementById("percent").innerHTML =
+    "Percentage<br>" + percentVal.toFixed(2) + "%";
+
+  document.getElementById("grade").innerHTML =
+    "Grade<br>" + getGrade(percentVal);
 }
+
 function resetCalc(){
-  ["tq","ca","wa","mpq","neg"].forEach(id=>document.getElementById(id).value="");
+  ["tq","ca","wa","mpq","neg"].forEach(id=>{
+    document.getElementById(id).value="";
+  });
   result.style.display="none";
 }
 </script>
+
 
 </body>
 </html>
