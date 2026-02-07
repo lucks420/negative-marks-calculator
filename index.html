@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negative Marks Calculator | Exam Score Tool</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins,system-ui,sans-serif;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  color:#1f2937;
+}
+.container{
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:28px;}
+.hero h1{font-size:2.1rem;color:#1e40af;margin-bottom:10px;}
+.hero p{max-width:720px;margin:auto;color:#4b5563;font-size:1rem;}
+
+/* CTA BUTTON */
+.hero-cta{
+  margin-top:18px;
+}
+.hero-cta a{
+  display:inline-block;
+  background:linear-gradient(135deg,#f97316,#fb923c);
+  color:#fff;
+  padding:12px 28px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(249,115,22,.35);
+}
+
+/* TRUST BADGE */
+.trust{
+  background:#ecfeff;
+  border:1px solid #67e8f9;
+  padding:12px 16px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:600;
+  color:#155e75;
+  margin-bottom:22px;
+}
+.trust a{
+  color:#0f766e;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* CALCULATOR CARD */
+.calc-card{
+  background:#ffffff;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+/* INPUTS */
+.input-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+.input-box{
+  display:flex;
+  align-items:center;
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  overflow:hidden;
+}
+.input-box i{
+  width:52px;
+  text-align:center;
+  color:#2563eb;
+  background:#eff6ff;
+  padding:14px 0;
+}
+.input-box input{
+  border:0;
+  outline:0;
+  padding:14px;
+  width:100%;
+  font-size:15px;
+}
+
+/* BUTTONS */
+.btn-row{
+  display:flex;
+  gap:14px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+.btn{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-primary{background:#2563eb;color:#fff;}
+.btn-secondary{background:#6b7280;color:#fff;}
+
+/* RESULT */
+.result{display:none;margin-top:30px;}
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;
+}
+.result-card{
+  color:#fff;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+}
+.score{background:linear-gradient(135deg,#2563eb,#3b82f6);}
+.total{background:linear-gradient(135deg,#7c3aed,#a78bfa);}
+.percent{background:linear-gradient(135deg,#059669,#10b981);}
+.grade{background:linear-gradient(135deg,#f97316,#fb923c);}
+
+/* RESULT CTA */
+.result-cta{
+  margin-top:30px;
+  text-align:center;
+  background:#f8fafc;
+  padding:20px;
+  border-radius:14px;
+  border:1px dashed #c7d2fe;
+}
+.result-cta a{
+  color:#2563eb;
+  font-weight:700;
+  font-size:16px;
+  text-decoration:none;
+}
+
+/* INFO */
+.info{margin-top:40px;}
+.info h2{color:#1e40af;}
+.info ul{line-height:1.8;}
+
+/* FOOTER */
+footer{
+  margin-top:50px;
+  text-align:center;
+  font-size:14px;
+  color:#374151;
+}
+footer a{
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Negative Marks Calculator</h1>
+    <p>
+      Calculate your exam score instantly with negative marking.
+      Ideal for SSC, Banking, Railway, UPSC and other competitive exams.
+    </p>
+
+    <div class="hero-cta">
+      <a href="https://markspercentagecalculator.in" target="_blank">
+        🔥 Visit Marks Percentage Calculator
+      </a>
+    </div>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust">
+    ⭐ Trusted Tool by
+    <a href="https://markspercentagecalculator.in" target="_blank">
+      Marks Percentage Calculator
+    </a>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="calc-card">
+    <div class="input-grid">
+      <div class="input-box"><i class="fa-solid fa-list-ol"></i><input id="tq" type="number" placeholder="Total Questions"></div>
+      <div class="input-box"><i class="fa-solid fa-check"></i><input id="ca" type="number" placeholder="Correct Answers"></div>
+      <div class="input-box"><i class="fa-solid fa-xmark"></i><input id="wa" type="number" placeholder="Wrong Answers"></div>
+      <div class="input-box"><i class="fa-solid fa-pen"></i><input id="mpq" type="number" step="0.1" placeholder="Marks per Question"></div>
+      <div class="input-box"><i class="fa-solid fa-minus"></i><input id="neg" type="number" step="0.1" placeholder="Negative Marks per Wrong"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="calc()">Calculate</button>
+      <button class="btn btn-secondary" onclick="resetCalc()">Reset</button>
+    </div>
+
+    <div id="result" class="result">
+      <div class="result-grid">
+        <div class="result-card score" id="score"></div>
+        <div class="result-card total" id="total"></div>
+        <div class="result-card percent" id="percent"></div>
+        <div class="result-card grade" id="grade"></div>
+      </div>
+
+      <div class="result-cta">
+        Want more useful calculators?<br>
+        <a href="https://markspercentagecalculator.in" target="_blank">
+          👉 Explore Marks Percentage Calculator
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    <h2>About This Tool</h2>
+    <ul>
+      <li>✔ Accurate score with negative marking</li>
+      <li>✔ Percentage & grade calculation</li>
+      <li>✔ Useful for all MCQ based exams</li>
+      <li>✔ Clean, responsive & fast</li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Created by <strong>Marks Percentage Calculator</strong> |
+    <a href="https://markspercentagecalculator.in" target="_blank">Visit Website</a>
+  </footer>
+
+</div>
+
+<script>
+function getGrade(p){
+  if(p<33) return "Fail ❌";
+  if(p>=90) return "A+ 🏆";
+  if(p>=75) return "A 😀";
+  if(p>=60) return "B 🙂";
+  if(p>=45) return "C 😅";
+  return "D 😔";
+}
+function calc(){
+  let t=+tq.value,c=+ca.value,w=+wa.value,m=+mpq.value,n=+neg.value;
+  if(t<=0||c<0||w<0||(c+w)>t){alert("Invalid input");return;}
+  let total=t*m;
+  let score=(c*m)-(w*n);
+  let per=(score/total)*100;
+
+  result.style.display="block";
+  score.innerHTML="Score<br>"+score.toFixed(2);
+  total.innerHTML="Total Marks<br>"+total.toFixed(2);
+  percent.innerHTML="Percentage<br>"+per.toFixed(2)+"%";
+  grade.innerHTML="Grade<br>"+getGrade(per);
+}
+function resetCalc(){
+  ["tq","ca","wa","mpq","neg"].forEach(id=>document.getElementById(id).value="");
+  result.style.display="none";
+}
+</script>
+
+</body>
+</html>
